@@ -6,8 +6,8 @@ import javax.xml.bind.annotation.XmlType;
 /**
  * Created by m.losK on 2017-03-13.
  */
-@XmlRootElement (name = "User")
-@XmlType (propOrder = {"login", "password"})
+@XmlRootElement(name = "User")
+@XmlType(propOrder = {"login", "password"})
 public class User {
     private String login;
     private String password;

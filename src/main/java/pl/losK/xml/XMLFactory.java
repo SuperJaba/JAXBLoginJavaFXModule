@@ -1,7 +1,5 @@
 package pl.losK.xml;
 
-import com.sun.xml.internal.stream.XMLInputFactoryImpl;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -46,8 +44,8 @@ public class XMLFactory<T> {
         return object;
     }
 
-    public String objectToXml(T object){
-        String result=null;
+    public String objectToXml(T object) {
+        String result = null;
         JAXBContext jaxbContext = null;
         try {
             jaxbContext = JAXBContext.newInstance(type);
@@ -62,8 +60,6 @@ public class XMLFactory<T> {
         }
 
         return result;
-
-
 
 
     }

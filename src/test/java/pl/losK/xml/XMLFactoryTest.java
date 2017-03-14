@@ -20,8 +20,8 @@ public class XMLFactoryTest {
     @Before
     public void setUp() {
         login = "user1234";
-        password = "abcd1234";
-        xmlUser = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><User><login>user1234</login><password>abcd1234</password></User>";
+        password = "password1234";
+        xmlUser = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><User><login>user1234</login><password>password1234</password></User>";
     }
 
     @Test
