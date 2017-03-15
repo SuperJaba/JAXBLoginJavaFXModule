@@ -1,7 +1,9 @@
 package pl.losK.console;
 
 import pl.losK.model.User;
+import pl.losK.service.DataService;
 import pl.losK.service.UserService;
+import pl.losK.xml.XMLFactory;
 
 import java.util.Scanner;
 
@@ -10,9 +12,23 @@ import java.util.Scanner;
  */
 public class Main {
     public static void main(String[] args) {
+
+        /**
+         * Example of file creation with (one) xml credentials
+         */
+
+//        User user = new User("user123", "abc123");
+//        XMLFactory<User> userXMLFactory = new XMLFactory<>(User.class);
+//        String xmlUser = userXMLFactory.objectToXml(user);
+//        DataService dataService = new DataService();
+//        dataService.saveData(xmlUser);
+
+        /**
+         * Call login module
+         */
+
         Scanner scanner = new Scanner(System.in);
         login(scanner);
-
     }
 
     private static void login(Scanner scanner) {
@@ -29,7 +45,7 @@ public class Main {
             if (isLogin) {
                 System.out.println("Congratulations! You are logged in.");
             } else {
-                System.out.println("Sorry! Wrong credentials");
+                System.out.println("Sorry! Wrong data");
             }
         }
     }

@@ -14,16 +14,16 @@ public class DataService {
 
     private File file;
 
+    //Requires correct file path
     public DataService() {
-
-        this.file = new File("C:\\Users\\RENT\\Desktop\\Project\\data.dat");
+        this.file = new File("C:\\Users\\Vitalij\\Desktop\\sdacademy\\data.dat");
     }
 
 
     public void saveData(String xmlString) {
         try {
             FileUtils.touch(file);
-            FileUtils.writeStringToFile(file, xmlString);
+            FileUtils.writeStringToFile(file, xmlString, "UTF-8");
         } catch (IOException e) {
             e.printStackTrace();
         }

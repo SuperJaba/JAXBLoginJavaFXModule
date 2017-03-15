@@ -26,6 +26,7 @@ public class DataServiceTest {
         userXML = new User("user1234", "password1234");
     }
 
+    //instead of working on files use Mockito
     public void loadData() {
         user = dataService.loadData();
     }
@@ -34,6 +35,7 @@ public class DataServiceTest {
         dataService.saveData(xmlString);
     }
 
+    //instead of working on files use Mockito
     @Test
     public void saveAndLoadData() {
         saveData();

@@ -7,28 +7,33 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.losK.controller.LoginController">
-   <children>
-      <GridPane>
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Password:" textAlignment="RIGHT" wrappingWidth="147.552734375" GridPane.rowIndex="1" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Login:" textAlignment="RIGHT" wrappingWidth="149.044921875" />
-            <TextField fx:id="loginField" GridPane.columnIndex="1" />
-            <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button fx:id="submit" mnemonicParsing="false" onAction="#submitOnAction" text="Login" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-         </children>
-      </GridPane>
-   </children>
-   <padding>
-      <Insets bottom="150.0" left="150.0" right="150.0" top="150.0" />
-   </padding>
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+           prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="pl.losK.controller.LoginController">
+    <children>
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            </rowConstraints>
+            <children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Password:" textAlignment="RIGHT"
+                      wrappingWidth="147.552734375" GridPane.rowIndex="1"/>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Login:" textAlignment="RIGHT"
+                      wrappingWidth="149.044921875"/>
+                <TextField fx:id="loginField" GridPane.columnIndex="1"/>
+                <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                <Button fx:id="submit" mnemonicParsing="false" onAction="#submitOnAction" onKeyPressed="#submitOnEnter" text="Login"
+                        GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+            </children>
+        </GridPane>
+    </children>
+    <padding>
+        <Insets bottom="150.0" left="150.0" right="150.0" top="100.0"/>
+    </padding>
 </StackPane>
