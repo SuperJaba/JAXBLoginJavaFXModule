@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.losK.controller.CompanyController">
+   <children>
+      <GridPane>
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="263.0" minWidth="10.0" prefWidth="200.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="194.0" minWidth="0.0" prefWidth="41.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="233.0" minWidth="10.0" prefWidth="125.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="233.0" minWidth="10.0" prefWidth="105.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="233.0" minWidth="10.0" prefWidth="130.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="41.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="97.0" minHeight="9.0" prefHeight="65.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="194.0" minHeight="5.0" prefHeight="64.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="178.0" minHeight="10.0" prefHeight="67.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="184.0" minHeight="10.0" prefHeight="107.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="178.0" minHeight="10.0" prefHeight="88.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Company Name:" textAlignment="CENTER" wrappingWidth="89.13671875" GridPane.halignment="RIGHT" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Address:" textAlignment="CENTER" wrappingWidth="49.10546875" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+            <RadioButton fx:id="avenueRadioButton" mnemonicParsing="false" text="al." GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="NIP:" wrappingWidth="27.4921875" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="REGON: " GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
+            <TextField fx:id="streetTextField" prefHeight="25.0" prefWidth="111.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <TextField fx:id="houseNumberTextField" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <TextField fx:id="flatNumberTextField" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+            <TextField fx:id="postalCodeTextField" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <TextField fx:id="cityNameTextField" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <TextField fx:id="nipTextField" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <TextField fx:id="regonTextField" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <RadioButton fx:id="streetRadioButton" mnemonicParsing="false" text="ul." GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+            <RadioButton fx:id="squareRadioButton" mnemonicParsing="false" text="pl." GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+            <Button fx:id="addCompanyButton" mnemonicParsing="false" onAction="#addCompanyOnAction" text="Add Company" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+            <TextField fx:id="companyNameTextField" prefHeight="25.0" prefWidth="76.0" GridPane.columnIndex="2" />
+         </children>
+      </GridPane>
+   </children>
+</StackPane>
