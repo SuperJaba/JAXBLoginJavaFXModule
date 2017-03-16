@@ -50,11 +50,32 @@ public class CompanyController {
     @FXML
     private TextField streetTextField;
 
+    private Address.StreetPrefix streetPrefix;
+
+//    @FXML
+//    void choosePrefixOnAction(ActionEvent event){
+//        if(event.getSource() instanceof RadioButton){
+//            RadioButton currentPrefixRadioButton = (RadioButton) event.getSource();
+//            squareRadioButton.setSelected(true);
+//        }
+//    }
+
     @FXML
-    void choosePrefixOnAction(ActionEvent event){
-        if(event.getSource() instanceof RadioButton){
+    void choosePrefixOnAction(ActionEvent event) {
+        if (event.getSource() instanceof RadioButton) {
             RadioButton currentPrefixRadioButton = (RadioButton) event.getSource();
-            squareRadioButton.setSelected(true);
+            String buttonName = currentPrefixRadioButton.getText();
+            switch (buttonName) {
+                case "ul.":
+                    streetPrefix = Address.StreetPrefix.STREET;
+                    break;
+                case "al.":
+                    streetPrefix = Address.StreetPrefix.AVENUE;
+                    break;
+                case "pl.":
+                    streetPrefix = Address.StreetPrefix.SQUARE;
+
+            }
         }
     }
 
@@ -64,13 +85,17 @@ public class CompanyController {
         Company company = new Company();
         company.setName(companyNameTextField.getText());
         Address address = new Address();
-        address.setStreetPrefix(str);
+        address.setStreetPrefix(Address.StreetPrefix.STREET);
         address.setStreetName(streetTextField.getText());
         address.setHouseNumber(houseNumberTextField.getText());
         address.setFlatNumber(flatNumberTextField.getText());
         address.setPostalCode(postalCodeTextField.getText());
         address.setCity(cityNameTextField.getText());
         company.setAddress(address);
+        company.setNip(nipTextField.getText());
+        company.setRegon(regonTextField.getText());
+        //TODO
+//        company.setId();
         System.out.println(company);
     }
 

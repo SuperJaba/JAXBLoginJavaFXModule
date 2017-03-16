@@ -16,7 +16,7 @@ public class Company {
     }
 
     public Company(UUID id, Address address, String nip, String regon, String name) {
-        this.id = id;
+        this.id = UUID.randomUUID();
         this.address = address;
         this.nip = nip;
         this.regon = regon;

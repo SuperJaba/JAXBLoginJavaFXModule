@@ -26,7 +26,7 @@
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Company Name:" textAlignment="CENTER" wrappingWidth="89.13671875" GridPane.halignment="RIGHT" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Address:" textAlignment="CENTER" wrappingWidth="49.10546875" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-            <RadioButton fx:id="avenueRadioButton" mnemonicParsing="false" text="al." GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <RadioButton fx:id="avenueRadioButton" mnemonicParsing="false" text="al." onAction="#choosePrefixOnAction" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="NIP:" wrappingWidth="27.4921875" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="REGON: " GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
             <TextField fx:id="streetTextField" prefHeight="25.0" prefWidth="111.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
@@ -36,8 +36,8 @@
             <TextField fx:id="cityNameTextField" GridPane.columnIndex="3" GridPane.rowIndex="2" />
             <TextField fx:id="nipTextField" GridPane.columnIndex="2" GridPane.rowIndex="3" />
             <TextField fx:id="regonTextField" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-            <RadioButton fx:id="streetRadioButton" mnemonicParsing="false" text="ul." GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="TOP" />
-            <RadioButton fx:id="squareRadioButton" mnemonicParsing="false" text="pl." GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+            <RadioButton fx:id="streetRadioButton" mnemonicParsing="false" text="ul." onAction="#choosePrefixOnAction" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+            <RadioButton fx:id="squareRadioButton" mnemonicParsing="false" text="pl." onAction="#choosePrefixOnAction" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
             <Button fx:id="addCompanyButton" mnemonicParsing="false" onAction="#addCompanyOnAction" text="Add Company" GridPane.columnIndex="4" GridPane.rowIndex="5" />
             <TextField fx:id="companyNameTextField" prefHeight="25.0" prefWidth="76.0" GridPane.columnIndex="2" />
          </children>
