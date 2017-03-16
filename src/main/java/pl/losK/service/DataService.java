@@ -20,7 +20,7 @@ public class DataService {
 
     //Requires correct file path
     public DataService() {
-        this.file = new File("C:\\Users\\RENT\\Desktop\\Project\\data.dat");
+        this.file = new File("C:\\Users\\Vitalij\\Desktop\\sdacademy\\data.dat");
     }
 
 
