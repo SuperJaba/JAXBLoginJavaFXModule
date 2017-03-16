@@ -14,7 +14,7 @@ import pl.losK.service.UserService;
 /**
  * Created by m.losK on 2017-03-14.
  */
-public class LoginController {
+public class LoginController extends Controller {
 
     @FXML
     private Button submit;
@@ -34,8 +34,7 @@ public class LoginController {
             Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION, "Congratulations! You are logged in.");
             confirmationAlert.show();
         } else {
-            Alert wrongCredentialsAlert = new Alert(Alert.AlertType.ERROR, "Sorry! Wrong data");
-            wrongCredentialsAlert.show();
+            showErrorAlert("Sorry! Wrong data");
         }
     }
 

@@ -90,9 +90,7 @@ public class Address {
     }
 
     public void setStreetPrefix(StreetPrefix streetPrefix) {
-//        if(streetPrefix.equals(StreetPrefix.STREET)){
-//            this.streetPrefix = streetPrefix;
-//        }
+        this.streetPrefix = streetPrefix;
     }
 
     @Override

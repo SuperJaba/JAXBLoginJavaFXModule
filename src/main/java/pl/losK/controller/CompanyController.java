@@ -2,17 +2,19 @@ package pl.losK.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import pl.losK.model.Address;
 import pl.losK.model.Company;
+import pl.losK.pdf.PDFFactory;
+import pl.losK.service.DataService;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by m.losK on 2017-03-15.
  */
-public class CompanyController {
+public class CompanyController extends Controller {
 
     @FXML
     private TextField nipTextField;
@@ -52,13 +54,6 @@ public class CompanyController {
 
     private Address.StreetPrefix streetPrefix;
 
-//    @FXML
-//    void choosePrefixOnAction(ActionEvent event){
-//        if(event.getSource() instanceof RadioButton){
-//            RadioButton currentPrefixRadioButton = (RadioButton) event.getSource();
-//            squareRadioButton.setSelected(true);
-//        }
-//    }
 
     @FXML
     void choosePrefixOnAction(ActionEvent event) {
@@ -74,6 +69,9 @@ public class CompanyController {
                     break;
                 case "pl.":
                     streetPrefix = Address.StreetPrefix.SQUARE;
+                    break;
+                default:
+                    streetPrefix = Address.StreetPrefix.STREET;
 
             }
         }
@@ -81,11 +79,16 @@ public class CompanyController {
 
 
     @FXML
-    void addCompanyOnAction(ActionEvent event) {
+    Company addCompanyOnAction() {
+        //TODO
+        return bindToModelCompany();
+    }
+
+    private Company bindToModelCompany() {
         Company company = new Company();
         company.setName(companyNameTextField.getText());
         Address address = new Address();
-        address.setStreetPrefix(Address.StreetPrefix.STREET);
+        address.setStreetPrefix(streetPrefix);
         address.setStreetName(streetTextField.getText());
         address.setHouseNumber(houseNumberTextField.getText());
         address.setFlatNumber(flatNumberTextField.getText());
@@ -94,13 +97,14 @@ public class CompanyController {
         company.setAddress(address);
         company.setNip(nipTextField.getText());
         company.setRegon(regonTextField.getText());
-        //TODO
-//        company.setId();
-        System.out.println(company);
+        DataService dataService = new DataService();
+        dataService.printOutCompanyInfo(company);
+        validatePostalCode();
+        return company;
     }
 
     @FXML
-    void initialize(){
+    void initialize() {
         ToggleGroup group = new ToggleGroup();
 
         streetRadioButton.setToggleGroup(group);
@@ -108,4 +112,25 @@ public class CompanyController {
         squareRadioButton.setToggleGroup(group);
     }
 
+    private void validatePostalCode() {
+        Pattern zipPattern = Pattern.compile("(^\\d{2}-\\d{3}$)");
+        Matcher zipMatcher = zipPattern.matcher(postalCodeTextField.getText());
+        if (zipMatcher.find()) {
+            String zip = zipMatcher.group(1);
+            showConfirmationAlert("Everything alright!");
+        } else {
+            showErrorAlert("Sorry! Wrong postal code");
+        }
+    }
+
+    @FXML
+    void createPDFOnAction(ActionEvent event) {
+        PDFFactory pdfFactory = new PDFFactory();
+        pdfFactory.pdfFromCompany(addCompanyOnAction());
+    }
+
+    @FXML
+    void validateOnAction(ActionEvent event) {
+        validatePostalCode();
+    }
 }
