@@ -11,11 +11,12 @@ import java.io.IOException;
 /**
  * Created by m.losK on 2017-03-15.
  */
-public class MainCompany extends Application{
+public class MainCompany extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/CompanyCreateView.fxml"));
+//        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/CompanyCreateView.fxml"));
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/Product.fxml"));
         StackPane stackPane = loader.load();
         Scene scene = new Scene(stackPane);
         primaryStage.setScene(scene);
