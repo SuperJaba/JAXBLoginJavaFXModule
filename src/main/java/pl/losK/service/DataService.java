@@ -1,14 +1,14 @@
 package pl.losK.service;
 
 import org.apache.commons.io.FileUtils;
-import pl.losK.model.Address;
-import pl.losK.model.Company;
-import pl.losK.model.User;
+import pl.losK.model.*;
 import pl.losK.xml.XMLFactory;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -22,7 +22,8 @@ public class DataService {
 
     //Requires correct file path
     public DataService() {
-        this.file = new File("C:\\Users\\RENT\\Desktop\\Project\\data.dat");
+        String filePath = loadProperties().getProperty("resourcesPath");
+        this.file = new File(filePath + File.separator + "data.dat");
     }
 
 
@@ -64,7 +65,7 @@ public class DataService {
         }
     }
 
-    public static Properties loadProperties(){
+    public static Properties loadProperties() {
         Properties result = new Properties();
         InputStream inputStream = DataService.class.getClassLoader().getResourceAsStream("data.properties");
         try {
@@ -72,7 +73,7 @@ public class DataService {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            if(inputStream!=null){
+            if (inputStream != null) {
                 try {
                     inputStream.close();
                 } catch (IOException e) {
@@ -80,6 +81,41 @@ public class DataService {
                 }
             }
         }
+        return result;
+    }
+
+    public Bill loadBillData() {
+
+        Bill bill = null;
+        XMLFactory<Bill> xmlFactory = new XMLFactory<Bill>(Bill.class);
+        String xml;
+        try {
+            xml = FileUtils.readFileToString(file, "UTF-8");
+            bill = xmlFactory.xmlToObject(xml);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return bill;
+    }
+
+    public List<String> printBillInfo(Bill bill) {
+        List<String> result = new ArrayList();
+        DecimalFormat df = new DecimalFormat("#.##");
+
+        SimpleDateFormat dt1 = new SimpleDateFormat("dd-MM-yyyy");
+        result.add(dt1.format(bill.getDate()).toString());
+
+        result.add("___________________________________");
+        for (BillItem e : bill.getListOfItems()) {
+            result.add(e.getAmount() + " x " + e.getItemName() + " "
+                    + df.format(e.getPrice()) + " zl = " + " " +
+                    df.format(e.getAmount() * e.getPrice()) + " zl");
+        }
+        result.add("___________________________________");
+        result.add("\t Price: \t" + df.format(bill.getPrice()).toString());
+        result.add("Paid:\t" + bill.getPayment().toString());
+
         return result;
     }
 }

@@ -14,7 +14,7 @@ public class BillItemService {
 
     private static BillItemService instance = null;
 
-    protected BillItemService() {
+    public BillItemService() {
         this.billItemList = new ArrayList<>();
         this.billItemList = createList();
     }

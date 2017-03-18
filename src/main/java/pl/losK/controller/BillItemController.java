@@ -4,7 +4,6 @@ package pl.losK.controller;
  * Created by k.czechowski83@gmail.com on 2017-03-18.
  */
 
-import com.sun.xml.internal.bind.v2.TODO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

@@ -1,12 +1,12 @@
 package pl.losK.controller;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.StackPane;
 import pl.losK.model.User;
 import pl.losK.service.UserService;
 
@@ -16,23 +16,31 @@ import pl.losK.service.UserService;
  */
 public class LoginController extends Controller {
 
+    private StackPane stackPane;
+
     @FXML
     private Button submit;
 
     @FXML
-    private PasswordField passwordField;
+    private PasswordField passwordTextField;
 
     @FXML
-    private TextField loginField;
+    private TextField loginTextField;
+
+    public LoginController() {
+    }
+
+    public LoginController(StackPane stackPane) {
+        this.stackPane = stackPane;
+    }
 
     @FXML
     void submitOnAction() {
         UserService userService = new UserService();
-        User user = new User(loginField.getText(), passwordField.getText());
+        User user = new User(loginTextField.getText(), passwordTextField.getText());
 
         if (userService.authenticate(user)) {
-            Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION, "Congratulations! You are logged in.");
-            confirmationAlert.show();
+            getMainController().loadView("MenuView");
         } else {
             showErrorAlert("Sorry! Wrong data");
         }

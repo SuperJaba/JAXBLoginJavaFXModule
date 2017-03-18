@@ -7,6 +7,18 @@ import javafx.scene.control.Alert;
  */
 public class Controller {
 
+    protected MainController mainController;
+
+    protected MenuController menuController;
+
+    protected MainController getMainController() {
+        return mainController;
+    }
+
+    public void setMainController(MainController mainController) {
+        this.mainController = mainController;
+    }
+
     protected void showErrorAlert(String message) {
         showAlert(Alert.AlertType.ERROR, message);
     }
