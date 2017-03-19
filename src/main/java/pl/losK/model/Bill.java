@@ -2,6 +2,7 @@ package pl.losK.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import java.time.LocalDate;
 import java.util.*;
 
 @XmlRootElement(name = "Bill")
@@ -10,14 +11,14 @@ public class Bill {
 
     private UUID id;
     private List<BillItem> listOfItems;
-    private Date date;
+    private LocalDate date;
     private Double price;
     private Double tax;
     private Payment payment;
 
     public Bill() {
         id = UUID.randomUUID();
-        date = new Date();
+        date = getDate();
         listOfItems = new ArrayList<>();
 
         price = 0.0;
@@ -26,9 +27,9 @@ public class Bill {
         payment = Payment.CARD;
     }
 
-    public void addItem(BillItem item, Integer amountBough) {
+    public void addItem(BillItem item, Integer amountBought) {
 
-        Integer addedAmount = item.getAmount() * amountBough;
+        Integer addedAmount = item.getAmount() * amountBought;
 
         if (listOfItems.contains(item)) {
             Integer oldAmount = listOfItems.get(listOfItems.indexOf(item)).getAmount();
@@ -103,12 +104,8 @@ public class Bill {
         this.listOfItems = listOfItems;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 
     public Double getPrice() {

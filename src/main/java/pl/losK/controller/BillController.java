@@ -111,7 +111,7 @@ public class BillController extends Controller {
             listGrid.add(new Label(line.getCode()), col, row + 1);
             listGrid.add(new Label(line.getItemName()), col + 1, row + 1);
             TextField textField = new TextField();
-            textField.setId("amountfield");
+            textField.setId("amountField");
             textField.textProperty().addListener((observable, oldValue, newValue) -> {
 //                System.out.println(line.getPrice()  + " to " + newValue);
 //                System.out.println(line);

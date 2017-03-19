@@ -86,20 +86,21 @@ public class CompanyController extends Controller {
 
     private Company bindToModelCompany() {
         Company company = new Company();
-        company.setName(companyNameTextField.getText());
-        Address address = new Address();
-        address.setStreetPrefix(streetPrefix);
-        address.setStreetName(streetTextField.getText());
-        address.setHouseNumber(houseNumberTextField.getText());
-        address.setFlatNumber(flatNumberTextField.getText());
-        address.setPostalCode(postalCodeTextField.getText());
-        address.setCity(cityNameTextField.getText());
-        company.setAddress(address);
-        company.setNip(nipTextField.getText());
-        company.setRegon(regonTextField.getText());
-        DataService dataService = new DataService();
-        dataService.printOutCompanyInfo(company);
-        validatePostalCode();
+        if (validateOnAction()) {
+            company.setName(companyNameTextField.getText());
+            Address address = new Address();
+            address.setStreetPrefix(streetPrefix);
+            address.setStreetName(streetTextField.getText());
+            address.setHouseNumber(houseNumberTextField.getText());
+            address.setFlatNumber(flatNumberTextField.getText());
+            address.setPostalCode(postalCodeTextField.getText());
+            address.setCity(cityNameTextField.getText());
+            company.setAddress(address);
+            company.setNip(nipTextField.getText());
+            company.setRegon(regonTextField.getText());
+            DataService dataService = new DataService();
+            dataService.printOutCompanyInfo(company);
+        }
         return company;
     }
 
@@ -112,17 +113,6 @@ public class CompanyController extends Controller {
         squareRadioButton.setToggleGroup(group);
     }
 
-    private void validatePostalCode() {
-        Pattern zipPattern = Pattern.compile("(^\\d{2}-\\d{3}$)");
-        Matcher zipMatcher = zipPattern.matcher(postalCodeTextField.getText());
-        if (zipMatcher.find()) {
-            String zip = zipMatcher.group(1);
-            showConfirmationAlert("Everything alright!");
-        } else {
-            showErrorAlert("Sorry! Wrong postal code");
-        }
-    }
-
     @FXML
     void createPDFOnAction(ActionEvent event) {
         PDFFactory pdfFactory = new PDFFactory();
@@ -130,7 +120,11 @@ public class CompanyController extends Controller {
     }
 
     @FXML
-    void validateOnAction(ActionEvent event) {
-        validatePostalCode();
+    boolean validateOnAction() {
+        boolean flag = false;
+        if (validatePostalCode(postalCodeTextField)) {
+            flag = true;
+        }
+        return flag;
     }
 }

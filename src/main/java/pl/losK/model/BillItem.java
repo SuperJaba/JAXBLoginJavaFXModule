@@ -4,21 +4,21 @@ package pl.losK.model;
  * Created by k.czechowski83@gmail.com on 2017-03-18.
  */
 public class BillItem {
-    private int amount;
+    private Integer amount;
     private String itemName;
-    private double price;
-    private double tax;
+    private Double price;
+    private Double tax;
     private String description;
     private String code;
 
     public BillItem() {
     }
 
-    public int getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(Integer amount) {
         this.amount = amount;
     }
 
@@ -30,19 +30,19 @@ public class BillItem {
         this.itemName = itemName;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
-    public double getTax() {
+    public Double getTax() {
         return tax;
     }
 
-    public void setTax(double tax) {
+    public void setTax(Double tax) {
         this.tax = tax;
     }
 
