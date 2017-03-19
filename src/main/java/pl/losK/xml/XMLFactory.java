@@ -45,10 +45,9 @@ public class XMLFactory<T> {
     }
 
     public String objectToXml(T object) {
-        String result = null;
-        JAXBContext jaxbContext = null;
+        String result = "objectToXml_ERROR";
         try {
-            jaxbContext = JAXBContext.newInstance(type);
+            JAXBContext jaxbContext = JAXBContext.newInstance(type);
             StringWriter stringWriter = new StringWriter();
             Marshaller marshaller = jaxbContext.createMarshaller();
             marshaller.marshal(object, stringWriter);

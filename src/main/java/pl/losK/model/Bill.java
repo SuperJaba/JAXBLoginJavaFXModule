@@ -24,7 +24,7 @@ public class Bill {
         price = 0.0;
         tax = 0.0;
 
-        payment = Payment.CARD;
+        payment = Payment.CASH;
     }
 
     public void addItem(BillItem item, Integer amountBought) {
@@ -66,14 +66,15 @@ public class Bill {
 
     public void updateItem(BillItem item, Integer amountBough) {
 
-        Integer addedAmount = item.getAmount() * amountBough;
+        if (amountBough < 0) {
+            amountBough = 0;
+        }
+
+        Integer addedAmount = amountBough;
 
         if (listOfItems.contains(item)) {
 
             Integer oldAmount = listOfItems.get(listOfItems.indexOf(item)).getAmount();
-
-            price -= item.getPrice() * oldAmount;
-            tax -= item.getPrice() * oldAmount * item.getTax();
 
             Integer newAmount = addedAmount;
             listOfItems.get(listOfItems.indexOf(item)).setAmount(newAmount);
@@ -84,8 +85,8 @@ public class Bill {
             listOfItems.add(item);
         }
 
-        price += item.getPrice() * addedAmount;
-        tax += item.getPrice() * addedAmount * item.getTax();
+        setPrice();
+        setTax();
     }
 
     public UUID getId() {
@@ -112,16 +113,22 @@ public class Bill {
         return price;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
+    private void setPrice() {
+        price = 0.0;
+        for (BillItem e : this.getListOfItems()) {
+            price += e.getAmount() * e.getPrice();
+        }
     }
 
     public Double getTax() {
         return tax;
     }
 
-    public void setTax(Double tax) {
-        this.tax = tax;
+    public void setTax() {
+        tax = 0.0;
+        for (BillItem e : this.getListOfItems()) {
+            tax += e.getAmount() * e.getPrice() * e.getTax();
+        }
     }
 
     public Payment getPayment() {

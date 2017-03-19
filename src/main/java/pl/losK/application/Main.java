@@ -15,11 +15,12 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/MainView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/MainView.fxml"));
+
         MainController mainController = new MainController(primaryStage);
-//        LoginController loginController = new LoginController(stackPane);
-        loader.setController(mainController);
-        StackPane stackPane = loader.load();
+        fxmlLoader.setController(mainController);
+
+        StackPane stackPane = fxmlLoader.load();
         Scene scene = new Scene(stackPane);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Company app");

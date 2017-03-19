@@ -26,6 +26,9 @@ public class DataService {
         this.file = new File(filePath + File.separator + "data.dat");
     }
 
+    public DataService(String fileDirection) {
+        this.file = new File(fileDirection);
+    }
 
     public void saveData(String xmlString) {
         try {
@@ -37,16 +40,14 @@ public class DataService {
     }
 
     public User loadData() {
-        User user = null;
         XMLFactory<User> xmlFactory = new XMLFactory<>(User.class);
-        String xml = null;
+        String xmlFromFile = null;
         try {
-            xml = FileUtils.readFileToString(file, "UTF-8");
-            user = xmlFactory.xmlToObject(xml);
+            xmlFromFile = FileUtils.readFileToString(file, "UTF-8");
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return user;
+        return xmlFactory.xmlToObject(xmlFromFile);
     }
 
     public List<String> printCompanyInfo(Company company) {
@@ -85,18 +86,15 @@ public class DataService {
     }
 
     public Bill loadBillData() {
-
-        Bill bill = null;
         XMLFactory<Bill> xmlFactory = new XMLFactory<Bill>(Bill.class);
-        String xml;
+        String XMLFromFile = null;
+
         try {
-            xml = FileUtils.readFileToString(file, "UTF-8");
-            bill = xmlFactory.xmlToObject(xml);
+            XMLFromFile = FileUtils.readFileToString(file,"UTF-8");
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        return bill;
+        return xmlFactory.xmlToObject(XMLFromFile);
     }
 
     public List<String> printBillInfo(Bill bill) {

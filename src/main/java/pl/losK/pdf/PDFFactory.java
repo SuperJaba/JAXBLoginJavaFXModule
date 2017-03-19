@@ -27,12 +27,16 @@ public class PDFFactory {
         Document document = new Document();
         try {
             PdfWriter.getInstance(document, new FileOutputStream(pdfPath + File.separator + "file.pdf"));
-            document.setPageSize(new Rectangle(180, 240));
+
+            Font font = new Font(Font.TIMES_ROMAN, 18.0f, Font.NORMAL, Color.black);
+
+            document.setPageSize(new Rectangle(180,240));
+            document.setMargins(15,15,15,15);
             document.open();
-            for (String e : listCompanyInfo) {
-                document.add(new Paragraph(e));
-            }
+            for(String e: listCompanyInfo)
+                document.add(new Paragraph(e,font));
             document.close();
+
         } catch (DocumentException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {
@@ -44,9 +48,8 @@ public class PDFFactory {
         DataService dataService = new DataService();
         List<String> companyInfoList = dataService.printBillInfo(bill);
 
-
         Properties properties = DataService.loadProperties();
-        String pdfPath = properties.getProperty("pdfPath");
+        String pdfPath = properties.getProperty("resourcesPath");
 
         Document document = new Document();
         try {
