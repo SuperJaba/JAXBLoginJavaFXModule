@@ -56,7 +56,7 @@ public class BillItemController extends Controller {
         if (validationOnAction()) {
             JsonFactory jsonFactory = new JsonFactory();
             BillItemService billItemService = BillItemService.getInstance();
-            List<BillItem> billItemList = billItemService.getBillItemList();
+            List<BillItem> billItemList = jsonFactory.loadListDataFromJsonFile();
             BillItem billItem = new BillItem();
             billItem.setItemName(productNameTextField.getText());
             billItem.setDescription(descriptionTextArea.getText());

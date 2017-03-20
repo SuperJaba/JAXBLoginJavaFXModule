@@ -7,6 +7,7 @@ import javafx.scene.layout.GridPane;
 import pl.losK.model.Bill;
 import pl.losK.model.BillItem;
 import pl.losK.service.BillItemService;
+import pl.losK.xml.JsonFactory;
 
 import java.util.List;
 
@@ -94,6 +95,7 @@ public class BillController extends Controller {
 //        }
 //    }
 
+    //TODO unchecked loadList
     @FXML
     void initialize() {
         ToggleGroup group = new ToggleGroup();
@@ -102,7 +104,7 @@ public class BillController extends Controller {
         //for
         Bill bill = new Bill();
         BillItemService billItemService = new BillItemService();
-        List<BillItem> list = billItemService.createList();
+        List<BillItem> list = new JsonFactory().loadListDataFromJsonFile();
 
         int col = 0;
         int row = 0;
@@ -122,9 +124,6 @@ public class BillController extends Controller {
 //            listgrid.add(new TextField();)
             row++;
             priceAll.setText(bill.getPrice().toString());
-
-
         }
-
     }
 }

@@ -64,13 +64,13 @@ public class Bill {
         }
     }
 
-    public void updateItem(BillItem item, Integer amountBough) {
+    public void updateItem(BillItem item, Integer amountBought) {
 
-        if (amountBough < 0) {
-            amountBough = 0;
+        if (amountBought < 0) {
+            amountBought = 0;
         }
 
-        Integer addedAmount = amountBough;
+        Integer addedAmount = amountBought;
 
         if (listOfItems.contains(item)) {
 
