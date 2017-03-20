@@ -53,14 +53,14 @@ public class Controller {
         boolean flag = false;
         if (givenStringTextField.getText() == null || givenStringTextField.getText().equals("")) {
             flag = true;
-        } else if(!isAlphaNumeric(givenStringTextField.getText())){
+        } else if(!isAlphaNumericWithSpaces(givenStringTextField.getText())){
             flag = true;
         }
         return flag;
     }
 
-    public boolean isAlphaNumeric(String s){
-        String pattern= "^[a-zA-Z0-9]*$";
+    public boolean isAlphaNumericWithSpaces(String s){
+        String pattern= "^[a-zA-Z0-9 ]*$";
         return s.matches(pattern);
     }
 

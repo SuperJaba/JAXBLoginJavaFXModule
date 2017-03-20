@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import org.apache.commons.io.FileUtils;
-import pl.losK.model.Bill;
 import pl.losK.model.BillItem;
 import pl.losK.service.DataService;
 
