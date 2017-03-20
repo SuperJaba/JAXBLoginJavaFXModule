@@ -5,7 +5,6 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
            prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
            fx:controller="pl.losK.controller.MenuController">
@@ -34,6 +33,11 @@
                             <items>
                                 <MenuItem fx:id="addProduct" mnemonicParsing="false" onAction="#addProductOnAction"
                                           text="AddProduct"/>
+                            </items>
+                        </Menu>
+                        <Menu fx:id="makeBill" mnemonicParsing="false" onAction="#makeBillOnAction" text="Bill">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="Action 1"/>
                             </items>
                         </Menu>
                     </menus>

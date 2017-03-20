@@ -5,32 +5,32 @@ import javax.xml.bind.annotation.XmlType;
 import java.time.LocalDate;
 import java.util.*;
 
+/**
+ * Created by Miki on 18.03.2017.
+ */
 @XmlRootElement(name = "Bill")
 @XmlType(propOrder = {"id", "listOfItems", "date", "price", "tax", "payment"})
 public class Bill {
-
     private UUID id;
     private List<BillItem> listOfItems;
-    private LocalDate date;
+    //    private HashMap<String, Integer> mapOfItems;
+    private Date date;
     private Double price;
     private Double tax;
     private Payment payment;
 
     public Bill() {
         id = UUID.randomUUID();
-        date = getDate();
-        listOfItems = new ArrayList<>();
-
+        date = new Date();
+        listOfItems = new ArrayList<BillItem>();
+        //        mapOfItems = new HashMap<String, Integer>();
         price = 0.0;
         tax = 0.0;
-
         payment = Payment.CASH;
     }
 
-    public void addItem(BillItem item, Integer amountBought) {
-
-        Integer addedAmount = item.getAmount() * amountBought;
-
+    public void addItem(BillItem item, Integer amountBough) {
+        Integer addedAmount = item.getAmount() * amountBough;
         if (listOfItems.contains(item)) {
             Integer oldAmount = listOfItems.get(listOfItems.indexOf(item)).getAmount();
             Integer newAmount = oldAmount + addedAmount;
@@ -39,23 +39,19 @@ public class Bill {
             item.setAmount(addedAmount);
             listOfItems.add(item);
         }
-
         price += item.getPrice() * addedAmount;
-        tax += item.getTax() * addedAmount * item.getTax();
+        tax += item.getPrice() * addedAmount * item.getTax();
     }
 
     public void removeItem(BillItem item, Integer amountToRemove) {
         Integer removedAmount = item.getAmount() * amountToRemove;
-
         if (listOfItems.contains(item)) {
             Integer oldAmount = listOfItems.get(listOfItems.indexOf(item)).getAmount();
             Integer newAmount = oldAmount - removedAmount;
             listOfItems.get(listOfItems.indexOf(item)).setAmount(newAmount);
-
             if (listOfItems.get(listOfItems.indexOf(item)).getAmount() <= 0) {
                 price -= item.getPrice() * oldAmount;
                 tax -= item.getPrice() * oldAmount * item.getTax();
-
                 listOfItems.remove(item);
             } else {
                 price -= item.getPrice() * removedAmount;
@@ -64,27 +60,28 @@ public class Bill {
         }
     }
 
-    public void updateItem(BillItem item, Integer amountBought) {
-
-        if (amountBought < 0) {
-            amountBought = 0;
+    public void updateItem(BillItem item, String valueInString) {
+        Integer valueOf = 0;
+        try {
+            valueOf = Integer.valueOf(valueInString);
+        } catch (Exception n) {
         }
+        updateItem(item, valueOf);
+    }
 
-        Integer addedAmount = amountBought;
-
+    public void updateItem(BillItem item, Integer amountBough) {
+        if (amountBough < 0) {
+            amountBough = 0;
+        }
+        Integer addedAmount = amountBough;
         if (listOfItems.contains(item)) {
-
             Integer oldAmount = listOfItems.get(listOfItems.indexOf(item)).getAmount();
-
             Integer newAmount = addedAmount;
             listOfItems.get(listOfItems.indexOf(item)).setAmount(newAmount);
-
-
         } else {
             item.setAmount(addedAmount);
             listOfItems.add(item);
         }
-
         setPrice();
         setTax();
     }
@@ -97,16 +94,12 @@ public class Bill {
         this.id = id;
     }
 
-    public List<BillItem> getListOfItems() {
-        return listOfItems;
-    }
-
-    public void setListOfItems(List<BillItem> listOfItems) {
-        this.listOfItems = listOfItems;
-    }
-
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public Double getPrice() {
@@ -139,15 +132,11 @@ public class Bill {
         this.payment = payment;
     }
 
-    @Override
-    public String toString() {
-        return "Bill{" +
-                "id=" + id +
-                ", listOfItems=" + listOfItems +
-                ", date=" + date +
-                ", price=" + price +
-                ", tax=" + tax +
-                ", payment=" + payment +
-                '}';
+    public List<BillItem> getListOfItems() {
+        return listOfItems;
+    }
+
+    public void setListOfItems(List<BillItem> listOfItems) {
+        this.listOfItems = listOfItems;
     }
 }

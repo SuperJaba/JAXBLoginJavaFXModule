@@ -1,13 +1,19 @@
 package pl.losK.controller;
 
 import javafx.event.ActionEvent;
+import javafx.geometry.HPos;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
 import pl.losK.model.Bill;
 import pl.losK.model.BillItem;
+import pl.losK.model.Payment;
+import pl.losK.pdf.PDFFactory;
 import pl.losK.service.BillItemService;
+import pl.losK.service.DataService;
 import pl.losK.xml.JsonFactory;
+import pl.losK.xml.XMLFactory;
 
 import java.util.List;
 
@@ -17,113 +23,96 @@ import java.util.List;
  */
 public class BillController extends Controller {
     @FXML
-    private TextField houseNumberField;
-
+    private Label priceAll;
     @FXML
-    private Button submit;
-
+    private Button printToPdf;
     @FXML
-    private TextField cityField;
-
+    private Button saveToFile;
     @FXML
-    private Button validateButton;
-
+    private RadioButton cashRadio;
     @FXML
-    private TextField countryField;
-
+    private GridPane listgrid;
     @FXML
     private RadioButton cardRadio;
 
     @FXML
-    private TextField postCodeField;
-
-    @FXML
-    private Button makePdfButton;
-
-    @FXML
-    private TextField streetNameField;
-
-    @FXML
-    private RadioButton cashRadio;
-
-    @FXML
-    private TextField flatNumberField;
-
-    @FXML
-    private GridPane listGrid;
-
-    @FXML
-    private TextField nipField;
-
-    @FXML
-    void addCompanyOnAction(ActionEvent event) {
-
+    void cashRadioClick(ActionEvent event) {
+        bill.setPayment(Payment.CASH);
+//        System.out.println("CASH");
     }
 
     @FXML
-    private Label priceAll;
-
-
-    @FXML
-    void makePdfOnAction(ActionEvent event) {
-
+    void cardRadioClick(ActionEvent event) {
+        bill.setPayment(Payment.CARD);
+//        System.out.println("CARD");
     }
 
     @FXML
-    void validateOnAction(ActionEvent event) {
-
+    void saveToFileClick(ActionEvent event) {
+//        DataService dataService = new DataService();
+//        XMLFactory<Bill> xmlFactory = new XMLFactory<>(Bill.class);
+//        String xmlBill = xmlFactory.objectToXml(bill);
+//        dataService.saveData(xmlBill);
     }
 
     @FXML
-    void changeAmount() {
-
+    void printToPdfClick(ActionEvent event) {
+        PDFFactory pdfFactory = new PDFFactory();
+        pdfFactory.createPdfBill(bill);
     }
 
-//    @FXML
-//    void choosePaymentOnAction(ActionEvent event) {
-//        if (event.getSource() instanceof RadioButton){
-//            RadioButton currentPrefixRadioButton = (RadioButton) event.getSource();
-////            currentPrefixRadioButton.get
-//            String buttonName = currentRadioButton.getText();
-//            switch (buttonName){
-//                case "Card":
-//                    cardPrefix = CardPrefix.Card;
-//                    break;
-//                case "Cash":
-//                    cashPrefix = CashPrefix.CASH;
-//                    break;         }
-//        }
-//    }
+    Bill bill;
 
-    //TODO unchecked loadList
     @FXML
     void initialize() {
+        bill = new Bill();
+        //ustawianie radio buttonow peymentu
         ToggleGroup group = new ToggleGroup();
         cashRadio.setToggleGroup(group);
         cardRadio.setToggleGroup(group);
-        //for
-        Bill bill = new Bill();
-        BillItemService billItemService = new BillItemService();
-        List<BillItem> list = new JsonFactory().loadListDataFromJsonFile();
-
+        if (bill.getPayment() == Payment.CARD) {
+            cardRadio.setSelected(true);
+        }
+        if (bill.getPayment() == Payment.CASH) {
+            cashRadio.setSelected(true);
+        }
+        //ustawianie listy produktow
+        BillItemService billItemService = BillItemService.getInstance();
+        JsonFactory jsonFactory = new JsonFactory();
+        List<BillItem> list = jsonFactory.loadListDataFromJsonFile();
         int col = 0;
         int row = 0;
+        Integer number = 1;
         for (BillItem line : list) {
-
-            listGrid.add(new Label(line.getCode()), col, row + 1);
-            listGrid.add(new Label(line.getItemName()), col + 1, row + 1);
+            //Kolumna 1: numeracja
+            listgrid.add(new Label(number.toString()), col, row + 1);
+            number++;
+            //Koluna 2: nazwa item'u
+            listgrid.add(new Label(line.getItemName()), col + 1, row + 1);
+            //Kolumna 3: Cena item'u
+            listgrid.add(new Label(line.getPrice() + " PLN"), col + 2, row + 1);
+            //Kolumna 4: Ilość zakupiona
+            Label itemPriceTotalLabel = new Label();//Label dla kolumny 5
             TextField textField = new TextField();
-            textField.setId("amountField");
+            textField.setId("amountfield");
             textField.textProperty().addListener((observable, oldValue, newValue) -> {
-//                System.out.println(line.getPrice()  + " to " + newValue);
-//                System.out.println(line);
-                bill.updateItem(line, Integer.valueOf(newValue));
-                System.out.println(bill.getPrice());
+                bill.updateItem(line, newValue);
+//                System.out.println(bill.getPrice());
+                priceAll.setText(bill.getPrice().toString());
+                if (line.getAmount() > 0) {
+                    itemPriceTotalLabel.setText(line.getPrice() * line.getAmount() + " PLN");
+                } else {
+                    itemPriceTotalLabel.setText("");
+                }
             });
-            listGrid.add(textField, col + 2, row + 1);
-//            listgrid.add(new TextField();)
+            textField.setPromptText("0");
+            textField.setAlignment(Pos.BASELINE_CENTER);
+            listgrid.add(textField, col + 3, row + 1);
+            //Kolumna 5: Cena zakpu
+            listgrid.add(itemPriceTotalLabel, col + 4, row + 1);
+            listgrid.setHalignment(itemPriceTotalLabel, HPos.CENTER);
+            //Zmiana wersu
             row++;
-            priceAll.setText(bill.getPrice().toString());
         }
     }
 }

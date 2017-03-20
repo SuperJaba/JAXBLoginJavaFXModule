@@ -2,6 +2,7 @@ package pl.losK.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.StackPane;
@@ -16,6 +17,9 @@ public class MenuController extends Controller {
 
     @FXML
     private StackPane contentPane;
+
+    @FXML
+    private Menu makeBill;
 
     @FXML
     void logoutOnAction(ActionEvent event) {
@@ -58,5 +62,10 @@ public class MenuController extends Controller {
     @FXML
     void addProductOnAction(ActionEvent event) {
         loadContentView("BillItemView");
+    }
+
+    @FXML
+    void makeBillOnAction(ActionEvent event) {
+        loadContentView("BillFormView");
     }
 }
