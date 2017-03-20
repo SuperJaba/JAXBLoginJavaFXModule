@@ -82,8 +82,8 @@ public class Bill {
             item.setAmount(addedAmount);
             listOfItems.add(item);
         }
-        setPrice();
-        setTax();
+        setPriceByItem();
+        setTaxByItem();
     }
 
     public UUID getId() {
@@ -106,18 +106,26 @@ public class Bill {
         return price;
     }
 
-    private void setPrice() {
+    private void setPriceByItem() {
         price = 0.0;
         for (BillItem e : this.getListOfItems()) {
             price += e.getAmount() * e.getPrice();
         }
     }
 
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public void setTax(Double tax) {
+        this.tax = tax;
+    }
+
     public Double getTax() {
         return tax;
     }
 
-    public void setTax() {
+    public void setTaxByItem() {
         tax = 0.0;
         for (BillItem e : this.getListOfItems()) {
             tax += e.getAmount() * e.getPrice() * e.getTax();

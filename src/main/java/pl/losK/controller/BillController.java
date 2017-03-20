@@ -49,10 +49,10 @@ public class BillController extends Controller {
 
     @FXML
     void saveToFileClick(ActionEvent event) {
-//        DataService dataService = new DataService();
-//        XMLFactory<Bill> xmlFactory = new XMLFactory<>(Bill.class);
-//        String xmlBill = xmlFactory.objectToXml(bill);
-//        dataService.saveData(xmlBill);
+        DataService dataService = new DataService();
+        XMLFactory<Bill> xmlFactory = new XMLFactory<>(Bill.class);
+        String xmlBill = xmlFactory.objectToXml(bill);
+        dataService.saveData(xmlBill);
     }
 
     @FXML
