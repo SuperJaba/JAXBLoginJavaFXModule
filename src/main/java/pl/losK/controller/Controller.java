@@ -2,6 +2,7 @@ package pl.losK.controller;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import pl.losK.validation.Validation;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -10,6 +11,12 @@ import java.util.regex.Pattern;
  * Created by m.losK on 2017-03-16.
  */
 public class Controller {
+
+    protected Validation validation;
+
+    public Controller() {
+         validation = new Validation();
+    }
 
     protected MainController mainController;
 
@@ -49,20 +56,20 @@ public class Controller {
         return flag;
     }
 
-    protected boolean validateStringTextField(TextField givenStringTextField) {
-        boolean flag = false;
-        if (givenStringTextField.getText() == null || givenStringTextField.getText().equals("")) {
-            flag = true;
-        } else if(!isAlphaNumericWithSpaces(givenStringTextField.getText())){
-            flag = true;
-        }
-        return flag;
-    }
-
-    public boolean isAlphaNumericWithSpaces(String s){
-        String pattern= "^[a-zA-Z0-9 ]*$";
-        return s.matches(pattern);
-    }
+//    protected boolean validateStringTextField(TextField givenStringTextField) {
+//        boolean flag = false;
+//        if (givenStringTextField.getText() == null || givenStringTextField.getText().equals("")) {
+//            flag = true;
+//        } else if(!isAlphaNumericWithSpaces(givenStringTextField.getText())){
+//            flag = true;
+//        }
+//        return flag;
+//    }
+//
+//    public boolean isAlphaNumericWithSpaces(String s){
+//        String pattern= "^[a-zA-Z0-9 ]*$";
+//        return s.matches(pattern);
+//    }
 
     protected boolean validateIntegerTextField(TextField givenIntegerTextField) {
         boolean flag = false;

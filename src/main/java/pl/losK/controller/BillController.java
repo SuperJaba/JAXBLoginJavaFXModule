@@ -23,6 +23,8 @@ import java.util.List;
  */
 public class BillController extends Controller {
     @FXML
+    private TextField search;
+    @FXML
     private Label priceAll;
     @FXML
     private Button printToPdf;
@@ -34,6 +36,7 @@ public class BillController extends Controller {
     private GridPane listgrid;
     @FXML
     private RadioButton cardRadio;
+    private List<BillItem> list;
 
     @FXML
     void cashRadioClick(ActionEvent event) {
@@ -79,7 +82,12 @@ public class BillController extends Controller {
         //ustawianie listy produktow
         BillItemService billItemService = BillItemService.getInstance();
         JsonFactory jsonFactory = new JsonFactory();
-        List<BillItem> list = jsonFactory.loadListDataFromJsonFile();
+         list = jsonFactory.loadListDataFromJsonFile();
+        loadList(list);
+    }
+
+    public void loadList(List<BillItem> list) {
+        listgrid.getChildren().clear();
         int col = 0;
         int row = 0;
         Integer number = 1;
@@ -114,5 +122,11 @@ public class BillController extends Controller {
             //Zmiana wersu
             row++;
         }
+    }
+
+    @FXML
+    void serchTextChange(ActionEvent event) {
+        list.stream().filter(billItem -> billItem.getItemName().startsWith(event.getSource().toString()));
+        loadList(list);
     }
 }

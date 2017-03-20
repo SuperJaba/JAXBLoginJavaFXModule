@@ -13,6 +13,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import pl.losK.model.BillItem;
 import pl.losK.service.BillItemService;
+import pl.losK.validation.Validation;
 import pl.losK.xml.JsonFactory;
 
 import java.util.List;
@@ -72,7 +73,7 @@ public class BillItemController extends Controller {
 
     private boolean validationOnAction() {
         boolean flag = false;
-        if (validateStringTextField(productNameTextField)) {
+        if (validation.validate(Validation.FieldType.STRING, productNameTextField.getText())) {
             showErrorAlert("Sorry! Entered name is incorrect. It has to be alphanumeric only");
         } else if (descriptionTextArea == null) {
             showErrorAlert("Sorry! Entered description is incorrect");
@@ -82,7 +83,7 @@ public class BillItemController extends Controller {
             showErrorAlert("Sorry! Entered price is incorrect");
         } else if (validateDoubleTextField(taxTextField)) {
             showErrorAlert("Sorry! Entered tax is incorrect");
-        } else if (validateStringTextField(codeTextField)) {
+        } else if (validation.validate(Validation.FieldType.STRING, codeTextField.getText())) {
             showErrorAlert("Sorry! Entered code is incorrect");
         } else {
             flag = true;
